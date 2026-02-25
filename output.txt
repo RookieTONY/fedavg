@@ -1,0 +1,1471 @@
+python run_visual.py --rounds 10 --clients 5 --compression topk
+==================================================
+联邦学习项目配置
+==================================================
+DATASET_NAME: CIFAR10
+DATA_ROOT: ./data
+BATCH_SIZE: 32
+NUM_CLIENTS: 5
+NUM_CLASSES: 10
+MODEL_NAME: CIFARNet
+LOCAL_EPOCHS: 2
+LEARNING_RATE: 0.01
+MOMENTUM: 0.9
+WEIGHT_DECAY: 0.0001
+NUM_ROUNDS: 10
+FRACTION_FIT: 1.0
+MIN_FIT_CLIENTS: 2
+MIN_AVAILABLE_CLIENTS: 2
+COMPRESSION_TYPE: topk
+TOPK_RATIO: 0.1
+QUANTIZE_BITS: 16
+SEED: 42
+DEVICE: cpu
+SERVER_ADDRESS: 0.0.0.0:8080
+NON_IID: True
+DIRICHLET_ALPHA: 0.5
+LOG_DIR: ./logs
+SAVE_MODEL: True
+MODEL_SAVE_PATH: ./saved_models
+create_dirs: <classmethod(<function Config.create_dirs at 0x1078b56c0>)>
+validate: <classmethod(<function Config.validate at 0x10ba492d0>)>
+display: <classmethod(<function Config.display at 0x10ba49360>)>
+==================================================
+============================================================
+联邦学习实验开始
+============================================================
+Experiment configuration saved to ./logs/20260226_021836/config.json
+
+初始化可视化系统...
+可视化图片将保存至: ./logs/visualizations/latest_progress.png
+
+======================================================================
+可视化系统已初始化 (后台生成图片模式)
+======================================================================
+可视化仪表盘已在后台启动 (主要进度请查看终端输出)
+Preparing client data...
+/Users/tonywang/Documents/gits/fed/visualization.py:126: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 24635 (\N{CJK UNIFIED IDEOGRAPH-603B}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20307 (\N{CJK UNIFIED IDEOGRAPH-4F53}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 36827 (\N{CJK UNIFIED IDEOGRAPH-8FDB}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 39044 (\N{CJK UNIFIED IDEOGRAPH-9884}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 35745 (\N{CJK UNIFIED IDEOGRAPH-8BA1}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 21097 (\N{CJK UNIFIED IDEOGRAPH-5269}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20313 (\N{CJK UNIFIED IDEOGRAPH-4F59}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 31639 (\N{CJK UNIFIED IDEOGRAPH-7B97}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 31561 (\N{CJK UNIFIED IDEOGRAPH-7B49}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 24453 (\N{CJK UNIFIED IDEOGRAPH-5F85}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 32852 (\N{CJK UNIFIED IDEOGRAPH-8054}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 37030 (\N{CJK UNIFIED IDEOGRAPH-90A6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 23398 (\N{CJK UNIFIED IDEOGRAPH-5B66}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20064 (\N{CJK UNIFIED IDEOGRAPH-4E60}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 30417 (\N{CJK UNIFIED IDEOGRAPH-76D1}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 25511 (\N{CJK UNIFIED IDEOGRAPH-63A7}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 21518 (\N{CJK UNIFIED IDEOGRAPH-540E}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 21488 (\N{CJK UNIFIED IDEOGRAPH-53F0}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+Client 0: 50000 samples (IID)
+Client 1: 50000 samples (IID)
+Client 2: 50000 samples (IID)
+Client 3: 50000 samples (IID)
+Client 4: 50000 samples (IID)
+
+客户端启动器已就绪，等待服务器启动...
+
+正在主线程启动服务器...
+==================================================
+Starting Federated Learning Server
+==================================================
+Address: 0.0.0.0:8080
+Number of rounds: 10
+Strategy: topk
+==================================================
+服务器已连接可视化追踪器
+WARNING :   DEPRECATED FEATURE: flwr.server.start_server() is deprecated.
+        Instead, use the `flower-superlink` CLI command to start a SuperLink as shown below:
+
+                $ flower-superlink --insecure
+
+        To view usage and all available options, run:
+
+                $ flower-superlink --help
+
+        Using `start_server()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+INFO :      Starting Flower server, config: num_rounds=10, no round_timeout
+INFO :      Flower ECE: gRPC server running (10 rounds), SSL is disabled
+INFO :      [INIT]
+INFO :      Requesting initial parameters from one random client
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 24635 (\N{CJK UNIFIED IDEOGRAPH-603B}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20307 (\N{CJK UNIFIED IDEOGRAPH-4F53}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 36827 (\N{CJK UNIFIED IDEOGRAPH-8FDB}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 24230 (\N{CJK UNIFIED IDEOGRAPH-5EA6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 39044 (\N{CJK UNIFIED IDEOGRAPH-9884}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 35745 (\N{CJK UNIFIED IDEOGRAPH-8BA1}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 21097 (\N{CJK UNIFIED IDEOGRAPH-5269}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20313 (\N{CJK UNIFIED IDEOGRAPH-4F59}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 31639 (\N{CJK UNIFIED IDEOGRAPH-7B97}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 31561 (\N{CJK UNIFIED IDEOGRAPH-7B49}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 24453 (\N{CJK UNIFIED IDEOGRAPH-5F85}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 32852 (\N{CJK UNIFIED IDEOGRAPH-8054}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 37030 (\N{CJK UNIFIED IDEOGRAPH-90A6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 23398 (\N{CJK UNIFIED IDEOGRAPH-5B66}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20064 (\N{CJK UNIFIED IDEOGRAPH-4E60}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 26102 (\N{CJK UNIFIED IDEOGRAPH-65F6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 30417 (\N{CJK UNIFIED IDEOGRAPH-76D1}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 25511 (\N{CJK UNIFIED IDEOGRAPH-63A7}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 21518 (\N{CJK UNIFIED IDEOGRAPH-540E}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 21488 (\N{CJK UNIFIED IDEOGRAPH-53F0}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 29983 (\N{CJK UNIFIED IDEOGRAPH-751F}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 25104 (\N{CJK UNIFIED IDEOGRAPH-6210}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+开始启动客户端进程...
+Starting client 0...
+WARNING :   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+        Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+                $ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+        To view all available options, run:
+
+                $ flower-supernode --help
+
+        Using `start_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+INFO :
+INFO :      Received: get_parameters message d6abaf2b-83e9-48fc-a223-9882b6fdd4b5
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+INFO :      Sent reply
+INFO :      Received initial parameters from one random client
+INFO :      Starting evaluation of initial global parameters
+INFO :      Evaluation returned no results (`None`)
+INFO :
+INFO :      [ROUND 1]
+Starting client 1...
+WARNING :   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+        Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+                $ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+        To view all available options, run:
+
+                $ flower-supernode --help
+
+        Using `start_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+INFO :      configure_fit: strategy sampled 2 clients (out of 2)
+INFO :
+INFO :      Received: train message e77cc89c-856e-4178-9128-d37d75c3dbbd
+Client 0: Starting local training...
+Client 0: Download size: 0.4742 MB
+INFO :
+INFO :      Received: train message 29a9e4b2-93d7-4f06-a689-856e416d2a6b
+Client 1: Starting local training...
+Client 1: Download size: 0.4742 MB
+Starting client 2...
+WARNING :   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+        Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+                $ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+        To view all available options, run:
+
+                $ flower-supernode --help
+
+        Using `start_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+Starting client 3...
+WARNING :   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+        Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+                $ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+        To view all available options, run:
+
+                $ flower-supernode --help
+
+        Using `start_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+Starting client 4...
+WARNING :   DEPRECATED FEATURE: flwr.client.start_client() is deprecated.
+        Instead, use the `flower-supernode` CLI command to start a SuperNode as shown below:
+
+                $ flower-supernode --insecure --superlink='<IP>:<PORT>'
+
+        To view all available options, run:
+
+                $ flower-supernode --help
+
+        Using `start_client()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+
+Client 0, Epoch 1: Loss: 1.7736, Acc: 0.3335
+Client 1, Epoch 1: Loss: 1.7948, Acc: 0.3251
+Client 0, Epoch 2: Loss: 1.5965, Acc: 0.4112
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 101.84 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.5876, Acc: 0.4157
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 102.72 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 2 results and 0 failures
+
+Server: Aggregating results for round 1
+Server: Round 1 - Avg Loss: 1.5920, Avg Accuracy: 0.4134, Communication Cost: 0.9483 MB
+[█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 10.0% | Round 1/10 | 已用: 0秒 | 预计: 0秒
+
+======================================================================
+Round 1 完成
+======================================================================
+训练 - Loss: 1.5920, Accuracy: 0.4134
+测试 - Loss: 0.0000, Accuracy: 0.0000
+通信成本: 0.95 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message c64a7103-d82d-4a51-983e-57d2a91b127d
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 8a7a337a-912e-49a9-96c6-24e8dccc7c3a
+INFO :
+INFO :      Received: evaluate message d07712d2-ffce-4df4-992f-d6fc7b8406ef
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message f85090b5-ee4d-4e8d-b23c-9cc59e64f8d0
+INFO :
+INFO :      Received: evaluate message 5a158084-6955-4de2-bef9-a57ae15c172c
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 31186 (\N{CJK UNIFIED IDEOGRAPH-79D2}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 25439 (\N{CJK UNIFIED IDEOGRAPH-635F}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 22833 (\N{CJK UNIFIED IDEOGRAPH-5931}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 26354 (\N{CJK UNIFIED IDEOGRAPH-66F2}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 32447 (\N{CJK UNIFIED IDEOGRAPH-7EBF}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 36718 (\N{CJK UNIFIED IDEOGRAPH-8F6E}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 27425 (\N{CJK UNIFIED IDEOGRAPH-6B21}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 35757 (\N{CJK UNIFIED IDEOGRAPH-8BAD}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 32451 (\N{CJK UNIFIED IDEOGRAPH-7EC3}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 27979 (\N{CJK UNIFIED IDEOGRAPH-6D4B}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 35797 (\N{CJK UNIFIED IDEOGRAPH-8BD5}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20934 (\N{CJK UNIFIED IDEOGRAPH-51C6}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 30830 (\N{CJK UNIFIED IDEOGRAPH-786E}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 29575 (\N{CJK UNIFIED IDEOGRAPH-7387}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 26368 (\N{CJK UNIFIED IDEOGRAPH-6700}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20339 (\N{CJK UNIFIED IDEOGRAPH-4F73}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+/Users/tonywang/Documents/gits/fed/visualization.py:152: UserWarning: Glyph 20998 (\N{CJK UNIFIED IDEOGRAPH-5206}) missing from font(s) DejaVu Sans.
+  self.fig.savefig(self.snapshot_path, dpi=100, bbox_inches='tight')
+Client 0: Evaluation - Loss: 2.0155, Accuracy: 0.3069
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 2.0155, Accuracy: 0.3069
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 2.0155, Accuracy: 0.3069
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 2.0155, Accuracy: 0.3069
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 2.0155, Accuracy: 0.3069
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 1
+Server: Round 1 Evaluation - Avg Loss: 2.0155, Avg Accuracy: 0.3069
+INFO :
+INFO :      [ROUND 2]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message c1663234-af59-4b79-a849-4b006b15a326
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message e52c992f-d751-4cee-8ff7-932661a9bfa4
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 7db36e86-bc50-4ece-9a93-b5bc653f0609
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 4ba9de6d-44e7-42bc-9eab-26e36bd99f89
+INFO :
+INFO :      Received: train message 1e020d15-6744-41cc-b8ce-1b9d80f8b7ef
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+Client 1, Epoch 1: Loss: 1.5975, Acc: 0.4125
+Client 0, Epoch 1: Loss: 1.5967, Acc: 0.4129
+Client 4, Epoch 1: Loss: 1.5992, Acc: 0.4113
+Client 2, Epoch 1: Loss: 1.5985, Acc: 0.4099
+Client 3, Epoch 1: Loss: 1.6020, Acc: 0.4111
+Client 3, Epoch 2: Loss: 1.5118, Acc: 0.4487
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 141.15 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.5164, Acc: 0.4472
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 143.07 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.5082, Acc: 0.4489
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 143.51 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.5105, Acc: 0.4494
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 143.99 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.5105, Acc: 0.4475
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 144.38 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 2
+Server: Round 2 - Avg Loss: 1.5115, Avg Accuracy: 0.4483, Communication Cost: 2.3708 MB
+[██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 20.0% | Round 2/10 | 已用: 2分42秒 | 预计: 10分48秒
+
+======================================================================
+Round 2 完成
+======================================================================
+训练 - Loss: 1.5115, Accuracy: 0.4483
+测试 - Loss: 2.0155, Accuracy: 0.3069
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message d5c0777a-83fc-48c5-9754-3f174e17d2d3
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message fe2c3c14-d3fd-433b-8ea2-fe7a8e21babc
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 3f7f71d3-b815-4b27-a732-1cfdd267a261
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 797a5ac6-c325-4e73-807a-41c063342ee1
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 745b2aad-4b12-41a3-9b09-1294211cf888
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+Client 2: Evaluation - Loss: 1.6402, Accuracy: 0.4772
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.6402, Accuracy: 0.4772
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.6402, Accuracy: 0.4772
+INFO :      Sent reply
+Client 0: Evaluation - Loss: 1.6402, Accuracy: 0.4772
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.6402, Accuracy: 0.4772
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 2
+Server: Round 2 Evaluation - Avg Loss: 1.6402, Avg Accuracy: 0.4772
+INFO :
+INFO :      [ROUND 3]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message 12476f44-bf93-4394-b66b-2125d4e14bb5
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 3dadd017-1add-461a-8341-a24611659f5f
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 77ec4483-e2d7-466d-bb04-c5133944ad17
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message e9dafc0f-d8f4-4c84-9245-d9a2a0c2ebb2
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message cd6c7711-8bcb-4699-a52c-89fbe9894023
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+Client 3, Epoch 1: Loss: 1.4855, Acc: 0.4587
+Client 1, Epoch 1: Loss: 1.4847, Acc: 0.4621
+Client 2, Epoch 1: Loss: 1.4836, Acc: 0.4626
+Client 0, Epoch 1: Loss: 1.4907, Acc: 0.4593
+Client 4, Epoch 1: Loss: 1.4822, Acc: 0.4629
+Client 1, Epoch 2: Loss: 1.4470, Acc: 0.4771
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 141.66 seconds
+INFO :      Sent reply
+Client 3, Epoch 2: Loss: 1.4486, Acc: 0.4759
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 142.06 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.4523, Acc: 0.4747
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 142.28 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.4465, Acc: 0.4772
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 142.38 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.4498, Acc: 0.4738
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 142.97 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 3
+Server: Round 3 - Avg Loss: 1.4488, Avg Accuracy: 0.4757, Communication Cost: 2.3708 MB
+[███████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 30.0% | Round 3/10 | 已用: 5分22秒 | 预计: 12分33秒
+
+======================================================================
+Round 3 完成
+======================================================================
+训练 - Loss: 1.4488, Accuracy: 0.4757
+测试 - Loss: 1.6402, Accuracy: 0.4772
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message f8c7bd39-26a1-4439-a9c3-def303b658a0
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 44e26a28-0290-49b2-b97b-4c964b3312ef
+INFO :
+INFO :      Received: evaluate message beef7b0a-6052-43b1-b66e-a825337fbdba
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message d9242596-b854-4819-b469-681bb71cc839
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 2ac34de8-7d95-4ead-bf8b-1222b0405a57
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+Client 0: Evaluation - Loss: 1.5446, Accuracy: 0.5071
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.5446, Accuracy: 0.5071
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.5446, Accuracy: 0.5071
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.5446, Accuracy: 0.5071
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.5446, Accuracy: 0.5071
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 3
+Server: Round 3 Evaluation - Avg Loss: 1.5446, Avg Accuracy: 0.5071
+INFO :
+INFO :      [ROUND 4]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message b45a0977-fbe1-4424-94f0-067c59f0c845
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message b3c372b4-63be-4e24-b0d1-e2eef706f5ed
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 01dacfa4-3f44-4cfb-ac64-51039f7cf39a
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 3d1416ff-e8e2-4cbf-a475-782695ed78b4
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 634f5787-aea9-4ea6-ba9a-7bc1ea9494a9
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+Client 0, Epoch 1: Loss: 1.4307, Acc: 0.4839
+Client 2, Epoch 1: Loss: 1.4338, Acc: 0.4849
+Client 1, Epoch 1: Loss: 1.4369, Acc: 0.4822
+Client 3, Epoch 1: Loss: 1.4334, Acc: 0.4848
+Client 4, Epoch 1: Loss: 1.4379, Acc: 0.4807
+Client 0, Epoch 2: Loss: 1.4175, Acc: 0.4864
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 136.41 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.4124, Acc: 0.4916
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 141.34 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.4065, Acc: 0.4933
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 142.76 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.4104, Acc: 0.4933
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 143.62 seconds
+INFO :      Sent reply
+Client 3, Epoch 2: Loss: 1.4110, Acc: 0.4911
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 143.70 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 4
+Server: Round 4 - Avg Loss: 1.4115, Avg Accuracy: 0.4912, Communication Cost: 2.3708 MB
+[████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 40.0% | Round 4/10 | 已用: 8分4秒 | 预计: 12分6秒
+
+======================================================================
+Round 4 完成
+======================================================================
+训练 - Loss: 1.4115, Accuracy: 0.4912
+测试 - Loss: 1.5446, Accuracy: 0.5071
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message d7f1b4a5-942b-45e4-94e8-cb181b35f8a5
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message aec7ab9a-b6ac-409f-a4ff-4dbfedb72856
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message dfdbd514-c533-4338-940b-412e24fb19dd
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message f3dd78da-9b59-4996-b50b-aeefa19a1647
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 2baa95a6-7875-4f68-bd15-a599aeada647
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+Client 3: Evaluation - Loss: 1.5204, Accuracy: 0.4901
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.5204, Accuracy: 0.4901
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.5204, Accuracy: 0.4901
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.5204, Accuracy: 0.4901
+INFO :      Sent reply
+Client 0: Evaluation - Loss: 1.5204, Accuracy: 0.4901
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 4
+Server: Round 4 Evaluation - Avg Loss: 1.5204, Avg Accuracy: 0.4901
+INFO :
+INFO :      [ROUND 5]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message 5648d9aa-5d42-4db3-8b71-f53fa2bece83
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 67a191f6-df5a-4094-a56b-3f7373ef3f03
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 4a7ec8ef-60ef-4330-b045-1e64f6250728
+INFO :
+INFO :      Received: train message c19a0ea0-5480-461c-9f45-b62256ef6da4
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message bfddff11-0cd1-46ed-9681-1ace184bde72
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+Client 2, Epoch 1: Loss: 1.4030, Acc: 0.4961
+Client 1, Epoch 1: Loss: 1.4004, Acc: 0.4955
+Client 4, Epoch 1: Loss: 1.4054, Acc: 0.4969
+Client 0, Epoch 1: Loss: 1.4074, Acc: 0.4961
+Client 3, Epoch 1: Loss: 1.4075, Acc: 0.4985
+Client 2, Epoch 2: Loss: 1.3848, Acc: 0.5021
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 138.28 seconds
+INFO :      Sent reply
+Client 3, Epoch 2: Loss: 1.3889, Acc: 0.5014
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 141.46 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.3883, Acc: 0.5012
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 142.22 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.3830, Acc: 0.5044
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 142.38 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.3839, Acc: 0.5045
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 143.38 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 5
+Server: Round 5 - Avg Loss: 1.3858, Avg Accuracy: 0.5027, Communication Cost: 2.3708 MB
+[█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░] 50.0% | Round 5/10 | 已用: 10分45秒 | 预计: 10分45秒
+
+======================================================================
+Round 5 完成
+======================================================================
+训练 - Loss: 1.3858, Accuracy: 0.5027
+测试 - Loss: 1.5204, Accuracy: 0.4901
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message 83ecbeac-905a-4bee-9618-36accc8eb892
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 1fa98a27-2b34-40b3-855e-574b5048cc04
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 4b0b4a25-3d4c-44b4-8911-367e69156819
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message af8fde2d-fcb6-4595-ac5b-e99023cdec89
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 2c479a51-5fe4-495e-8383-8b64d3be8def
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+Client 0: Evaluation - Loss: 1.4552, Accuracy: 0.5293
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.4552, Accuracy: 0.5293
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.4552, Accuracy: 0.5293
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.4552, Accuracy: 0.5293
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.4552, Accuracy: 0.5293
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 5
+Server: Round 5 Evaluation - Avg Loss: 1.4552, Avg Accuracy: 0.5293
+INFO :
+INFO :      [ROUND 6]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message caa8c0d2-62e4-404e-9d0e-137bf19235c9
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message e3b6aa0a-c96a-406f-b82c-d134e0ccc48e
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 3bdc84fd-cbe0-4ec9-9071-920ef8be0559
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message ebed376b-ce53-4674-9726-060d9e6c4255
+INFO :
+INFO :      Received: train message 89aa33d9-6799-424e-8b8a-a6cad18586ce
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+Client 2, Epoch 1: Loss: 1.3802, Acc: 0.5057
+Client 1, Epoch 1: Loss: 1.3795, Acc: 0.5060
+Client 4, Epoch 1: Loss: 1.3798, Acc: 0.5054
+Client 0, Epoch 1: Loss: 1.3791, Acc: 0.5063
+Client 3, Epoch 1: Loss: 1.3854, Acc: 0.5040
+Client 2, Epoch 2: Loss: 1.3643, Acc: 0.5112
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 138.10 seconds
+INFO :      Sent reply
+Client 3, Epoch 2: Loss: 1.3704, Acc: 0.5105
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 140.95 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.3626, Acc: 0.5139
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 142.07 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.3636, Acc: 0.5117
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 143.19 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.3711, Acc: 0.5101
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 143.22 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 6
+Server: Round 6 - Avg Loss: 1.3664, Avg Accuracy: 0.5115, Communication Cost: 2.3708 MB
+[██████████████████████████████░░░░░░░░░░░░░░░░░░░░] 60.0% | Round 6/10 | 已用: 13分26秒 | 预计: 8分57秒
+
+======================================================================
+Round 6 完成
+======================================================================
+训练 - Loss: 1.3664, Accuracy: 0.5115
+测试 - Loss: 1.4552, Accuracy: 0.5293
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message 40c14c10-d9fe-4b82-8245-3fba1a5c3352
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 8fcf303f-e5df-45ea-b404-d7409f497a77
+INFO :
+INFO :      Received: evaluate message 2d50380f-f95d-4df0-a466-8b701c145597
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message b3fa7289-4a9f-4831-a992-3018dc2802fc
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message f31cfdef-20f3-462a-8a09-64d6b54e1975
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+Client 0: Evaluation - Loss: 1.4544, Accuracy: 0.5222
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.4544, Accuracy: 0.5222
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.4544, Accuracy: 0.5222
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.4544, Accuracy: 0.5222
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.4544, Accuracy: 0.5222
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 6
+Server: Round 6 Evaluation - Avg Loss: 1.4544, Avg Accuracy: 0.5222
+INFO :
+INFO :      [ROUND 7]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message 3aa305a6-51e0-4b40-9f92-49e305b6fa50
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message fe78db0a-6637-4f93-90b4-3cf071c30050
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 1955b002-4acf-46e6-94fd-e6adf63078de
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message e5ce1c21-7fd0-4ef3-a48f-6157f78b74ed
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 11ea9042-771a-44e0-bf6d-5e8ff4d12ebe
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+Client 1, Epoch 1: Loss: 1.3642, Acc: 0.5126
+Client 4, Epoch 1: Loss: 1.3665, Acc: 0.5123
+Client 2, Epoch 1: Loss: 1.3661, Acc: 0.5110
+Client 0, Epoch 1: Loss: 1.3659, Acc: 0.5124
+Client 3, Epoch 1: Loss: 1.3600, Acc: 0.5111
+Client 3, Epoch 2: Loss: 1.3495, Acc: 0.5182
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 141.07 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.3509, Acc: 0.5167
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 141.77 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.3509, Acc: 0.5183
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 142.88 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.3484, Acc: 0.5203
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 143.46 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.3539, Acc: 0.5182
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 143.95 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 7
+Server: Round 7 - Avg Loss: 1.3507, Avg Accuracy: 0.5183, Communication Cost: 2.3708 MB
+[███████████████████████████████████░░░░░░░░░░░░░░░] 70.0% | Round 7/10 | 已用: 16分8秒 | 预计: 6分54秒
+
+======================================================================
+Round 7 完成
+======================================================================
+训练 - Loss: 1.3507, Accuracy: 0.5183
+测试 - Loss: 1.4544, Accuracy: 0.5222
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message 566c2e01-787c-4883-b396-1725e8a714e5
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message b393b3ff-a9ba-487b-9e1f-694a68511733
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 3fd1035e-5083-47ac-af5a-9891f45d0318
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message fd228714-dbee-45aa-a900-48a9729e96a0
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 71de539c-8527-48a7-83a7-6775b62219cb
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+Client 0: Evaluation - Loss: 1.4260, Accuracy: 0.5374
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.4260, Accuracy: 0.5374
+Client 1: Evaluation - Loss: 1.4260, Accuracy: 0.5374
+INFO :      Sent reply
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.4260, Accuracy: 0.5374
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.4260, Accuracy: 0.5374
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 7
+Server: Round 7 Evaluation - Avg Loss: 1.4260, Avg Accuracy: 0.5374
+INFO :
+INFO :      [ROUND 8]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message e440c32a-44e6-49f2-917c-c315a7cc2334
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message c0f7e9fd-6594-4a04-a816-3c6a49ac12cb
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 50377170-3598-45bc-9253-0e8cedd1a6ae
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message d428563d-85d1-4a6d-b387-4347ee7f6735
+INFO :
+INFO :      Received: train message 63350b93-cde2-4c7f-8479-7336935e2dab
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+Client 2, Epoch 1: Loss: 1.3512, Acc: 0.5175
+Client 1, Epoch 1: Loss: 1.3524, Acc: 0.5166
+Client 4, Epoch 1: Loss: 1.3496, Acc: 0.5185
+Client 0, Epoch 1: Loss: 1.3547, Acc: 0.5158
+Client 3, Epoch 1: Loss: 1.3507, Acc: 0.5177
+Client 3, Epoch 2: Loss: 1.3431, Acc: 0.5186
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 141.34 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.3405, Acc: 0.5234
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 141.92 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.3392, Acc: 0.5229
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 142.41 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.3369, Acc: 0.5230
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 143.24 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.3378, Acc: 0.5238
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 143.61 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 8
+Server: Round 8 - Avg Loss: 1.3395, Avg Accuracy: 0.5223, Communication Cost: 2.3708 MB
+[████████████████████████████████████████░░░░░░░░░░] 80.0% | Round 8/10 | 已用: 18分49秒 | 预计: 4分42秒
+
+======================================================================
+Round 8 完成
+======================================================================
+训练 - Loss: 1.3395, Accuracy: 0.5223
+测试 - Loss: 1.4260, Accuracy: 0.5374
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message be9f1324-5da5-4c6d-a137-2558aa1fbb48
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 37fdebf0-69fd-47a0-91a8-a0578c407ac1
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 68280402-832d-4d5b-beba-3425c10078ed
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 3e1354d2-82c4-4b15-9766-9911c01e4697
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message e1ecf8cd-e2b5-4be1-a447-bda473c123a5
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+Client 3: Evaluation - Loss: 1.3908, Accuracy: 0.5451
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.3908, Accuracy: 0.5451
+Client 0: Evaluation - Loss: 1.3908, Accuracy: 0.5451
+INFO :      Sent reply
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.3908, Accuracy: 0.5451
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.3908, Accuracy: 0.5451
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 8
+Server: Round 8 Evaluation - Avg Loss: 1.3908, Avg Accuracy: 0.5451
+INFO :
+INFO :      [ROUND 9]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message 5a6794e3-881c-4a62-91d1-6b96cf70fe40
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message bd1dfc9d-332d-4e54-94a2-ac7e467a4247
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message c5d7990b-5200-465f-b3dc-e3748ce6d0bd
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 52c35532-6bdf-4ca8-8fcf-d495ee0ec8b8
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 13625b79-ad25-41d1-9bd1-aa7118940bea
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+Client 1, Epoch 1: Loss: 1.3374, Acc: 0.5225
+Client 0, Epoch 1: Loss: 1.3404, Acc: 0.5205
+Client 2, Epoch 1: Loss: 1.3390, Acc: 0.5241
+Client 4, Epoch 1: Loss: 1.3404, Acc: 0.5239
+Client 3, Epoch 1: Loss: 1.3353, Acc: 0.5259
+Client 1, Epoch 2: Loss: 1.3302, Acc: 0.5256
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 134.92 seconds
+INFO :      Sent reply
+Client 0, Epoch 2: Loss: 1.3337, Acc: 0.5237
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 142.08 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.3287, Acc: 0.5269
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 142.74 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.3323, Acc: 0.5254
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 142.85 seconds
+INFO :      Sent reply
+Client 3, Epoch 2: Loss: 1.3246, Acc: 0.5250
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 143.62 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 9
+Server: Round 9 - Avg Loss: 1.3299, Avg Accuracy: 0.5253, Communication Cost: 2.3708 MB
+[█████████████████████████████████████████████░░░░░] 90.0% | Round 9/10 | 已用: 21分31秒 | 预计: 2分23秒
+
+======================================================================
+Round 9 完成
+======================================================================
+训练 - Loss: 1.3299, Accuracy: 0.5253
+测试 - Loss: 1.3908, Accuracy: 0.5451
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message 8c8052e3-5e94-4c90-aeb7-316649cd6485
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 5336047d-b9f8-4702-af9c-6088d0daec43
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message ef1680e2-7556-4346-8e45-6189a63151a1
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 5e19f603-ceed-4450-8417-9b2321192a27
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 3d261f70-2532-4286-84d7-36acde6d970c
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+Client 1: Evaluation - Loss: 1.3719, Accuracy: 0.5511
+Client 0: Evaluation - Loss: 1.3719, Accuracy: 0.5511
+INFO :      Sent reply
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.3719, Accuracy: 0.5511
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.3719, Accuracy: 0.5511
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.3719, Accuracy: 0.5511
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 9
+Server: Round 9 Evaluation - Avg Loss: 1.3719, Avg Accuracy: 0.5511
+INFO :
+INFO :      [ROUND 10]
+INFO :      configure_fit: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: train message 7d37f33d-9ea0-4871-9ebb-3c22518d8863
+Client 3: Starting local training...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 7970ffe2-b254-44fe-a7a9-7ce50878afa0
+Client 4: Starting local training...
+Client 4: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message 05a38ae4-a452-423d-b324-ca27b2e457b6
+INFO :
+INFO :      Received: train message 4ef021fe-dd1f-46ed-96d6-c80e6850e476
+Client 1: Starting local training...
+Client 1: Download size: 2.3699 MB
+Client 2: Starting local training...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: train message a1308428-1154-44f9-bc36-1f85be929752
+Client 0: Starting local training...
+Client 0: Download size: 2.3699 MB
+Client 0, Epoch 1: Loss: 1.3270, Acc: 0.5262
+Client 1, Epoch 1: Loss: 1.3301, Acc: 0.5267
+Client 2, Epoch 1: Loss: 1.3314, Acc: 0.5270
+Client 4, Epoch 1: Loss: 1.3372, Acc: 0.5237
+Client 3, Epoch 1: Loss: 1.3280, Acc: 0.5286
+Client 0, Epoch 2: Loss: 1.3207, Acc: 0.5298
+Client 0: Getting parameters...
+Client 0: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 0: Compression ratio: 79.99%
+Client 0: Training completed in 139.08 seconds
+INFO :      Sent reply
+Client 1, Epoch 2: Loss: 1.3178, Acc: 0.5323
+Client 1: Getting parameters...
+Client 1: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 1: Compression ratio: 79.99%
+Client 1: Training completed in 142.79 seconds
+INFO :      Sent reply
+Client 2, Epoch 2: Loss: 1.3218, Acc: 0.5295
+Client 2: Getting parameters...
+Client 2: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 2: Compression ratio: 79.99%
+Client 2: Training completed in 143.70 seconds
+INFO :      Sent reply
+Client 4, Epoch 2: Loss: 1.3202, Acc: 0.5275
+Client 4: Getting parameters...
+Client 4: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 4: Compression ratio: 79.99%
+Client 4: Training completed in 143.96 seconds
+INFO :      Sent reply
+Client 3, Epoch 2: Loss: 1.3217, Acc: 0.5289
+Client 3: Getting parameters...
+Client 3: Upload size reduced from 2.3699 MB to 0.4742 MB
+Client 3: Compression ratio: 79.99%
+Client 3: Training completed in 144.86 seconds
+INFO :      Sent reply
+INFO :      aggregate_fit: received 5 results and 0 failures
+
+Server: Aggregating results for round 10
+Server: Round 10 - Avg Loss: 1.3205, Avg Accuracy: 0.5296, Communication Cost: 2.3708 MB
+[██████████████████████████████████████████████████] 100.0% | Round 10/10 | 已用: 24分13秒 | 预计: 0秒
+
+======================================================================
+Round 10 完成
+======================================================================
+训练 - Loss: 1.3205, Accuracy: 0.5296
+测试 - Loss: 1.3719, Accuracy: 0.5511
+通信成本: 2.37 MB
+======================================================================
+
+INFO :      configure_evaluate: strategy sampled 5 clients (out of 5)
+INFO :
+INFO :      Received: evaluate message d6d6b1f2-4b1e-497f-8e97-bb2f637031c8
+Client 2: Starting evaluation...
+Client 2: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 82c074cd-d11c-4a37-9d93-210d01a96f3f
+Client 1: Starting evaluation...
+Client 1: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 53b5faf8-1aa7-478c-a063-dacfdf18d644
+Client 0: Starting evaluation...
+Client 0: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message 4349bf9a-5860-4938-9f84-12e3017b68a4
+Client 3: Starting evaluation...
+Client 3: Download size: 2.3699 MB
+INFO :
+INFO :      Received: evaluate message ba66e4f9-5da6-4a20-ba5f-557d70a5ddd3
+Client 4: Starting evaluation...
+Client 4: Download size: 2.3699 MB
+Client 0: Evaluation - Loss: 1.3649, Accuracy: 0.5567
+INFO :      Sent reply
+Client 2: Evaluation - Loss: 1.3649, Accuracy: 0.5567
+INFO :      Sent reply
+Client 1: Evaluation - Loss: 1.3649, Accuracy: 0.5567
+INFO :      Sent reply
+Client 4: Evaluation - Loss: 1.3649, Accuracy: 0.5567
+INFO :      Sent reply
+Client 3: Evaluation - Loss: 1.3649, Accuracy: 0.5567
+INFO :      Sent reply
+INFO :      aggregate_evaluate: received 5 results and 0 failures
+Server: Aggregating evaluation results for round 10
+Server: Round 10 Evaluation - Avg Loss: 1.3649, Avg Accuracy: 0.5567
+INFO :
+INFO :      [SUMMARY]
+INFO :      Run finished 10 round(s) in 1577.96s
+INFO :          History (loss, distributed):
+INFO :                  round 1: 2.015530824661255
+INFO :                  round 2: 1.6402347087860107
+INFO :                  round 3: 1.5445960760116577
+INFO :                  round 4: 1.5203593969345093
+INFO :                  round 5: 1.4552096128463745
+INFO :                  round 6: 1.4544217586517334
+INFO :                  round 7: 1.4260337352752686
+INFO :                  round 8: 1.39076566696167
+INFO :                  round 9: 1.3719391822814941
+INFO :                  round 10: 1.3648791313171387
+INFO :          History (metrics, distributed, fit):
+INFO :          {'avg_train_accuracy': [(1, 0.41344),
+INFO :                                  (2, 0.44834),
+INFO :                                  (3, 0.475732),
+INFO :                                  (4, 0.49116),
+INFO :                                  (5, 0.502744),
+INFO :                                  (6, 0.51148),
+INFO :                                  (7, 0.518348),
+INFO :                                  (8, 0.522328),
+INFO :                                  (9, 0.525316),
+INFO :                                  (10, 0.529608)],
+INFO :           'avg_train_loss': [(1, 1.592046612722326),
+INFO :                              (2, 1.5114945481926374),
+INFO :                              (3, 1.4488488312875012),
+INFO :                              (4, 1.4115495875411055),
+INFO :                              (5, 1.3857931026189052),
+INFO :                              (6, 1.366423046047384),
+INFO :                              (7, 1.3507342488431655),
+INFO :                              (8, 1.3394879653144172),
+INFO :                              (9, 1.3299065993904533),
+INFO :                              (10, 1.320452035030187)],
+INFO :           'communication_cost': [(1, 0.9483261108398438),
+INFO :                                  (2, 2.3708152770996094),
+INFO :                                  (3, 2.3708152770996094),
+INFO :                                  (4, 2.3708152770996094),
+INFO :                                  (5, 2.3708152770996094),
+INFO :                                  (6, 2.3708152770996094),
+INFO :                                  (7, 2.3708152770996094),
+INFO :                                  (8, 2.3708152770996094),
+INFO :                                  (9, 2.3708152770996094),
+INFO :                                  (10, 2.3708152770996094)],
+INFO :           'num_clients': [(1, 2),
+INFO :                           (2, 5),
+INFO :                           (3, 5),
+INFO :                           (4, 5),
+INFO :                           (5, 5),
+INFO :                           (6, 5),
+INFO :                           (7, 5),
+INFO :                           (8, 5),
+INFO :                           (9, 5),
+INFO :                           (10, 5)],
+INFO :           'total_samples': [(1, 100000),
+INFO :                             (2, 250000),
+INFO :                             (3, 250000),
+INFO :                             (4, 250000),
+INFO :                             (5, 250000),
+INFO :                             (6, 250000),
+INFO :                             (7, 250000),
+INFO :                             (8, 250000),
+INFO :                             (9, 250000),
+INFO :                             (10, 250000)]}
+INFO :          History (metrics, distributed, evaluate):
+INFO :          {'avg_test_accuracy': [(1, 0.3069),
+INFO :                                 (2, 0.4772),
+INFO :                                 (3, 0.5071),
+INFO :                                 (4, 0.4901),
+INFO :                                 (5, 0.5293),
+INFO :                                 (6, 0.5222),
+INFO :                                 (7, 0.5374),
+INFO :                                 (8, 0.5451),
+INFO :                                 (9, 0.5511),
+INFO :                                 (10, 0.5567)],
+INFO :           'avg_test_loss': [(1, 2.015530824661255),
+INFO :                             (2, 1.6402347087860107),
+INFO :                             (3, 1.5445960760116577),
+INFO :                             (4, 1.5203593969345093),
+INFO :                             (5, 1.4552096128463745),
+INFO :                             (6, 1.4544217586517334),
+INFO :                             (7, 1.4260337352752686),
+INFO :                             (8, 1.39076566696167),
+INFO :                             (9, 1.3719391822814941),
+INFO :                             (10, 1.3648791313171387)],
+INFO :           'total_samples': [(1, 50000),
+INFO :                             (2, 50000),
+INFO :                             (3, 50000),
+INFO :                             (4, 50000),
+INFO :                             (5, 50000),
+INFO :                             (6, 50000),
+INFO :                             (7, 50000),
+INFO :                             (8, 50000),
+INFO :                             (9, 50000),
+INFO :                             (10, 50000)]}
+INFO :
+INFO :
+INFO :      Received: reconnect message 8010209c-c20e-4ece-a15e-0c90149e82c0
+INFO :
+INFO :      Received: reconnect message 80007144-fcbc-4de3-8df9-176e7f1de3b6
+INFO :
+INFO :      Received: reconnect message bfb6a74d-caee-41ad-9d06-6e7f1e07b533
+INFO :
+INFO :      Received: reconnect message 6bd06cda-dafe-4191-a537-a20175bdb6aa
+INFO :
+INFO :      Received: reconnect message cd1bd613-3488-4ade-b97b-d3d3883e5d86
+INFO :      Disconnect and shut down
+INFO :      Disconnect and shut down
+INFO :      Disconnect and shut down
+INFO :      Disconnect and shut down
+INFO :      Disconnect and shut down
+Server: Training history saved to ./logs/training_history.json
+
+
+======================================================================
+实验完成!
+======================================================================
+总用时: 24分31秒
+完成轮次: 10/10
+最佳测试准确率: 0.5511 (第 10 轮)
+总通信成本: 22.29 MB
+======================================================================
+
+Server completed all rounds
+
+停止可视化系统...
+
+==================================================
+实验结果摘要
+==================================================
+最终训练损失: 1.3205
+最终训练准确率: 0.5296
+最终测试损失: 1.3649
+最终测试准确率: 0.5567
+最佳测试准确率: 0.5567
+收敛轮次: 10
+总通信成本: 22.2857 MB
+==================================================
+Training history plot saved to ./logs/20260226_021836/training_history.png
+Communication cost plot saved to ./logs/20260226_021836/communication_cost.png
+
+实验结果已保存到: ./logs/20260226_021836
+============================================================
+联邦学习实验完成
+============================================================
