@@ -151,6 +151,14 @@ class CIFARClient(fl.client.NumPyClient):
             for indices, values in compressed_data:
                 serialized.append(indices)
                 serialized.append(values)
+        elif self.config.COMPRESSION_TYPE == "quantize":
+            # 关键修正：序列化 scales 信息
+            # metadata['scales'] 是一个浮点数列表
+            scales_array = np.array(metadata['scales'], dtype=np.float32)
+            serialized.append(scales_array)
+
+            # 添加量化后的数据
+            serialized.extend(compressed_data)
         else:
             serialized.extend(compressed_data)
 
@@ -158,12 +166,12 @@ class CIFARClient(fl.client.NumPyClient):
 
     def _deserialize_compressed_data(self, parameters: List[np.ndarray]) -> Tuple:
         """
-        反序列化压缩数据（修正版）
+        反序列化压缩数据（修正版，支持Quantize）
         """
         # 提取元数据
         metadata_array = parameters[0]
-        num_layers = metadata_array[0]
-        compression_type = chr(metadata_array[1])
+        num_layers = int(metadata_array[0])
+        compression_type = chr(int(metadata_array[1]))
 
         # 提取并重建形状信息
         shapes_info = parameters[1]
@@ -171,15 +179,18 @@ class CIFARClient(fl.client.NumPyClient):
         # 重建 shapes 列表
         shapes = []
         idx = 0
-        num_shapes = shapes_info[idx]
+        num_shapes = int(shapes_info[idx])
         idx += 1
 
         for _ in range(num_shapes):
-            shape_len = shapes_info[idx]
+            shape_len = int(shapes_info[idx])
             idx += 1
-            shape = tuple(shapes_info[idx:idx + shape_len])
+            shape = tuple(int(shapes_info[idx + i]) for i in range(shape_len))
             shapes.append(shape)
             idx += shape_len
+
+        # 初始化 metadata 字典
+        metadata = {'shapes': shapes}
 
         # 提取压缩数据
         if compression_type == 't':  # topk
@@ -191,11 +202,21 @@ class CIFARClient(fl.client.NumPyClient):
                 values = parameters[param_idx + 1]
                 compressed_data.append((indices, values))
                 param_idx += 2
+
+        elif compression_type == 'q':  # quantize
+            # 关键修正：提取 scales 信息
+            # scales 在 shapes 之后 (index 2)
+            scales = parameters[2]
+            metadata['scales'] = scales
+
+            # 提取量化数据 (从 index 3 开始)
+            compressed_data = parameters[3:3 + num_layers]
+
         else:
             # 其他压缩类型
             compressed_data = parameters[2:2 + num_layers]
 
-        return compressed_data, compression_type, shapes
+        return compressed_data, compression_type, metadata
 
     def set_parameters(self, parameters: List[np.ndarray]) -> None:
         """
@@ -213,14 +234,12 @@ class CIFARClient(fl.client.NumPyClient):
                 len(parameters[0].shape) == 1 and
                 parameters[0].shape[0] == 2):  # 检查是否是压缩格式
 
-            # 解压数据（现在返回3个值）
-            compressed_data, compression_type, shapes = self._deserialize_compressed_data(parameters)
+            # 解压数据（现在返回 compressed_data, compression_type, metadata）
+            compressed_data, compression_type, metadata = self._deserialize_compressed_data(parameters)
 
-            # 重建元数据
-            metadata = {
-                'shapes': shapes,
-                'original_sizes': [int(np.prod(shape)) for shape in shapes]
-            }
+            # 补充 metadata（TopK 需要 original_sizes）
+            if compression_type == 't':
+                metadata['original_sizes'] = [int(np.prod(shape)) for shape in metadata['shapes']]
 
             # 解压数据
             parameters = self.compressor.decompress(compressed_data, metadata)

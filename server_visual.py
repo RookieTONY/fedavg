@@ -64,8 +64,7 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
 
     def _deserialize_compressed_data(self, parameters: List[np.ndarray]) -> Tuple:
         """
-        反序列化压缩数据
-        从客户端接收的压缩参数中重建原始参数
+        反序列化压缩数据（修正版，支持Quantize）
         """
         # 提取元数据
         metadata_array = parameters[0]
@@ -88,6 +87,9 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
             shapes.append(shape)
             idx += shape_len
 
+        # 初始化 metadata 字典
+        metadata = {'shapes': shapes}
+
         # 提取压缩数据
         if compression_type == 't':  # topk
             compressed_data = []
@@ -98,11 +100,20 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
                 values = parameters[param_idx + 1]
                 compressed_data.append((indices, values))
                 param_idx += 2
+
+        elif compression_type == 'q':  # quantize
+            # 关键修正：提取 scales 信息
+            scales = parameters[2]
+            metadata['scales'] = scales
+
+            # 提取量化数据 (从 index 3 开始)
+            compressed_data = parameters[3:3 + num_layers]
+
         else:
             # 其他压缩类型
             compressed_data = parameters[2:2 + num_layers]
 
-        return compressed_data, compression_type, shapes
+        return compressed_data, compression_type, metadata
 
     def _decompress_client_parameters(self, parameters: List[np.ndarray]) -> List[np.ndarray]:
         """
@@ -116,13 +127,11 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
 
             try:
                 # 反序列化
-                compressed_data, compression_type, shapes = self._deserialize_compressed_data(parameters)
+                compressed_data, compression_type, metadata = self._deserialize_compressed_data(parameters)
 
-                # 重建元数据
-                metadata = {
-                    'shapes': shapes,
-                    'original_sizes': [int(np.prod(shape)) for shape in shapes]
-                }
+                # 补充 metadata（TopK 需要 original_sizes）
+                if compression_type == 't':
+                    metadata['original_sizes'] = [int(np.prod(shape)) for shape in metadata['shapes']]
 
                 # 解压
                 decompressed = self.compressor.decompress(compressed_data, metadata)
