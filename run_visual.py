@@ -20,13 +20,14 @@ from server_visual import start_server, create_strategy
 from utils import (
     set_seed, get_experiment_id, save_experiment_config,
     plot_training_history, plot_communication_cost, analyze_results,
-    print_results_summary
+    print_results_summary, plot_comparison_results,
+    plot_training_history_comparison, create_comparison_summary_table
 )
 
 # 尝试导入可视化模块
 try:
     from visualization import (
-        init_visualization, get_visualizer, get_reporter, get_tracker
+        init_visualization, get_reporter, get_tracker
     )
 
     VISUALIZATION_AVAILABLE = True
@@ -131,22 +132,12 @@ def run_experiment(config: Config):
     config_path = os.path.join(experiment_dir, "config.json")
     save_experiment_config(config, config_path)
 
-    # 初始化可视化系统
+    # 初始化进度追踪系统
     if VISUALIZATION_AVAILABLE:
-        print("\n初始化可视化系统...")
-        tracker, visualizer, reporter = init_visualization(config)
-
-        # 注意：由于服务器占用主线程，可视化窗口需要以非阻塞方式运行
-        # 这里我们主要依赖终端输出(ProgressReporter)来查看进度
-        # 可视化窗口将在后台尝试更新，或者您可以查看保存的图表
-        if visualizer:
-            # 在后台线程启动可视化更新循环
-            viz_thread = threading.Thread(target=visualizer.start, daemon=True)
-            viz_thread.start()
-            print("可视化仪表盘已在后台启动 (主要进度请查看终端输出)")
+        print("\n初始化进度追踪系统...")
+        tracker, _, reporter = init_visualization(config)
     else:
         tracker = None
-        visualizer = None
         reporter = None
 
     # 准备客户端数据
@@ -171,11 +162,6 @@ def run_experiment(config: Config):
     except KeyboardInterrupt:
         print("\n\n用户中断实验...")
         history = None
-    finally:
-        # 清理可视化
-        if VISUALIZATION_AVAILABLE and visualizer:
-            print("\n停止可视化系统...")
-            visualizer.stop()
 
     # 实验结束后的处理
     if history:
@@ -210,44 +196,130 @@ def run_experiment(config: Config):
 
 
 def run_comparison_experiment(base_config: Config):
-    """运行对比实验：不同压缩算法"""
+    """运行对比实验：不同压缩算法和参数"""
     print("=" * 60)
-    print("运行对比实验：不同压缩算法")
+    print("运行对比实验：不同压缩算法和参数")
     print("=" * 60)
 
-    compression_types = ["none", "topk", "quantize"]
+    # 定义6组实验配置
+    experiments = [
+        # 压缩类型, 参数键, 参数值, 显示名称
+        ("none", None, None, "无压缩"),
+        ("topk", "TOPK_RATIO", 0.05, "Top-K (5%)"),
+        ("topk", "TOPK_RATIO", 0.1, "Top-K (10%)"),
+        ("topk", "TOPK_RATIO", 0.2, "Top-K (20%)"),
+        ("quantize", "QUANTIZE_BITS", 8, "量化 (8bit)"),
+        ("quantize", "QUANTIZE_BITS", 16, "量化 (16bit)"),
+    ]
+
     results = {}
+    exp_id = 0
 
-    for compression_type in compression_types:
-        print(f"\n运行实验: {compression_type} 压缩")
+    for comp_type, param_key, param_value, display_name in experiments:
+        exp_id += 1
+        print(f"\n{'='*60}")
+        print(f"[{exp_id}/6] 运行实验: {display_name}")
+        print(f"{'='*60}")
 
         # 创建配置副本
         config = Config()
-        config.COMPRESSION_TYPE = compression_type
+        config.COMPRESSION_TYPE = comp_type
 
-        if compression_type == "topk":
-            config.TOPK_RATIO = 0.1
-        elif compression_type == "quantize":
-            config.QUANTIZE_BITS = 16
+        # 设置参数
+        if param_key is not None:
+            setattr(config, param_key, param_value)
 
         # 运行实验
         history, analysis = run_experiment(config)
-        results[compression_type] = {
+
+        # 使用唯一的key存储结果
+        result_key = f"{comp_type}_{param_value}" if param_value is not None else comp_type
+        results[result_key] = {
             'history': history,
-            'analysis': analysis
+            'analysis': analysis,
+            'display_name': display_name
         }
 
-    # 生成对比报告
+    # 生成对比报告和可视化
     print("\n" + "=" * 60)
-    print("对比实验结果")
+    print("对比实验结果分析")
     print("=" * 60)
 
-    for compression_type, result in results.items():
+    for result_key, result in results.items():
         analysis = result['analysis']
-        print(f"\n{compression_type.upper()} 压缩:")
-        print(f"  最终测试准确率: {analysis['final_test_accuracy']:.4f}")
-        print(f"  最佳测试准确率: {analysis['best_test_accuracy']:.4f}")
-        print(f"  总通信成本: {analysis['total_communication_cost']:.4f} MB")
+        display_name = result['display_name']
+        print(f"\n{display_name}:")
+        print(f"  最终测试准确率: {analysis.get('final_test_accuracy', 0):.4f}")
+        print(f"  最佳测试准确率: {analysis.get('best_test_accuracy', 0):.4f}")
+        print(f"  总通信成本: {analysis.get('total_communication_cost', 0):.4f} MB")
+
+    # 生成可视化结果
+    print("\n" + "=" * 60)
+    print("生成对比可视化结果...")
+    print("=" * 60)
+
+    # 创建保存目录
+    comparison_dir = os.path.join(base_config.LOG_DIR, "comparison")
+    os.makedirs(comparison_dir, exist_ok=True)
+
+    # 生成综合对比图表
+    plot_comparison_results(
+        results,
+        os.path.join(comparison_dir, "comparison_overview.png"),
+        "压缩算法对比实验"
+    )
+
+    # 生成训练历史对比图表
+    plot_training_history_comparison(
+        results,
+        os.path.join(comparison_dir, "training_history_comparison.png"),
+        "训练历史对比"
+    )
+
+    # 尝试生成摘要表格
+    try:
+        table_str = create_comparison_summary_table(
+            results,
+            os.path.join(comparison_dir, "comparison_summary.txt")
+        )
+        print("\n对比摘要表格:")
+        print(table_str)
+    except ImportError:
+        print("\n提示: 安装 tabulate 库可生成格式化表格 (pip install tabulate)")
+
+    # 保存对比结果到JSON
+    import json
+    comparison_results = {}
+    for result_key, result in results.items():
+        comparison_results[result_key] = {
+            'display_name': result.get('display_name', result_key),
+            'history': result['history'],
+            'analysis': result['analysis']
+        }
+
+    comparison_json_path = os.path.join(comparison_dir, "comparison_results.json")
+    with open(comparison_json_path, 'w', encoding='utf-8') as f:
+        # 转换numpy类型为Python类型
+        def convert_types(obj):
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            elif isinstance(obj, np.floating):
+                return float(obj)
+            elif isinstance(obj, np.integer):
+                return int(obj)
+            elif isinstance(obj, dict):
+                return {k: convert_types(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_types(item) for item in obj]
+            return obj
+
+        json.dump(convert_types(comparison_results), f, indent=2, ensure_ascii=False)
+
+    print(f"\n对比实验结果已保存到: {comparison_dir}")
+    print(f"  - 综合对比图表: comparison_overview.png")
+    print(f"  - 训练历史对比: training_history_comparison.png")
+    print(f"  - 摘要表格: comparison_summary.txt")
+    print(f"  - 完整数据: comparison_results.json")
 
     return results
 

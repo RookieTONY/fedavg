@@ -214,7 +214,7 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
         # 转换为Parameters对象
         aggregated_parameters_proto = fl.common.ndarrays_to_parameters(aggregated_parameters)
 
-        # 更新可视化进度
+        # 更新进度追踪
         if VISUALIZATION_AVAILABLE and hasattr(self, 'tracker'):
             # 获取测试指标（如果有）
             test_loss = self.history['test_loss'][-1] if self.history['test_loss'] else 0.0
@@ -226,7 +226,7 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
                 round_stats['upload_cost'], round_time
             )
 
-            # 更新可视化
+            # 更新进度
             update_progress(round_num=server_round)
 
             # 打印轮次摘要
@@ -234,7 +234,7 @@ class FedAvgWithCompression(fl.server.strategy.FedAvg):
             if reporter:
                 reporter.print_round_summary(
                     server_round, avg_loss, avg_accuracy,
-                    test_loss, test_acc, round_stats['upload_cost']
+                    test_loss, test_acc, round_stats['upload_cost'], round_time
                 )
 
         # 返回聚合结果和统计信息
