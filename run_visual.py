@@ -10,6 +10,7 @@ import threading
 import multiprocessing
 from typing import List, Dict
 import flwr as fl
+import numpy as np
 
 # 导入项目模块
 from config import Config
